@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Display Data";
+    string[] TableHeaders = new string[] {"Id"
+                      ,"FullName"
+                      ,"Gender"
+                      ,"AdmissionNumber"
+                      ,"Gmail"
+                      ,"PhoneNumber"};
+}@if (User.Identity.IsAuthenticated)
+{
+
+    <div class="table">
+        <table class="table table-bordered table-hover" border="1">
+            <thead>
+                <tr>
+                    @{
+                        foreach (var head in TableHeaders)
+                        {
+                            <th>
+                                @head
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @{
+                    if (Model != null)
+                    {
+                        foreach (var Data in Model)
+                        {
+                            <tr>
+                                <td>@Data.Id</td>
+                                <td>@Data.FullName</td>
+                                <td>@Data.Gender</td>
+                                <td>@Data.AdmissionNumber</td>
+                                <td>@Data.Gmail</td>
+                                <td>@Data.PhoneNumber</td>
+                            </tr>
+                        }
+                    }
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div><p>Please Login to view the content</p></div>
+    <div class="row" style="padding-top:50px;">
+        @Html.ActionLink("LogIn", "Index", "Home", null, new { @class = "btn btn-primary btn-lg rph-login-button" })
+    </div>
+}
